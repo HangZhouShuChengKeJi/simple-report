@@ -3,7 +3,6 @@ package com.orange.heart.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.orange.commons.web.json.JsonSupport;
 
 import java.util.List;
 

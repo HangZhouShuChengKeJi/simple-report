@@ -27,8 +27,7 @@ import java.util.Map;
 /**
  * 列名信息修改
  * 
- * @author Administrator
- * 
+ * @author allen
  */
 @Controller
 public class CrudConfigController extends BaseAdminController {
