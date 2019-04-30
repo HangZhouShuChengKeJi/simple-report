@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orange.heart.dao.RCrudColumnDAO" >
+  <resultMap id="BaseResultMap" type="com.orange.heart.entity.RCrudColumn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="column_name" property="columnName" jdbcType="VARCHAR" />
+    <result column="column_type" property="columnType" jdbcType="INTEGER" />
+    <result column="column_id" property="columnId" jdbcType="VARCHAR" />
+    <result column="dict_info" property="dictInfo" jdbcType="VARCHAR" />
+    <result column="required" property="required" jdbcType="INTEGER" />
+    <result column="data_format" property="dataFormat" jdbcType="VARCHAR" />
+    <result column="regular_express" property="regularExpress" jdbcType="VARCHAR" />
+    <result column="maxlength" property="maxlength" jdbcType="INTEGER" />
+    <result column="style_express" property="styleExpress" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="add_flag" property="addFlag" jdbcType="INTEGER" />
+    <result column="edit_flag" property="editFlag" jdbcType="INTEGER" />
+    <result column="list_flag" property="listFlag" jdbcType="INTEGER" />
+    <result column="query_flag" property="queryFlag" jdbcType="INTEGER" />
+    <result column="query_format" property="queryFormat" jdbcType="VARCHAR" />
+    <result column="href_column" property="hrefColumn" jdbcType="VARCHAR" />
+    <result column="detail_flag" property="detailFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, keyword, `column_name`, column_type, column_id, dict_info, required, data_format, 
+    regular_express, maxlength, style_express, sort, add_flag, edit_flag, list_flag, 
+    query_flag, query_format, href_column, detail_flag, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.orange.heart.entity.RCrudColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from r_crud_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="offset != null and limit != null" >
+      limit ${offset}, ${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from r_crud_column
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from r_crud_column
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.orange.heart.entity.RCrudColumnExample" >
+    delete from r_crud_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.orange.heart.entity.RCrudColumn" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into r_crud_column (keyword, `column_name`, column_type, 
+      column_id, dict_info, required, 
+      data_format, regular_express, maxlength, 
+      style_express, sort, add_flag, 
+      edit_flag, list_flag, query_flag, 
+      query_format, href_column, detail_flag, 
+      create_time, update_time)
+    values (#{keyword,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{columnType,jdbcType=INTEGER}, 
+      #{columnId,jdbcType=VARCHAR}, #{dictInfo,jdbcType=VARCHAR}, #{required,jdbcType=INTEGER}, 
+      #{dataFormat,jdbcType=VARCHAR}, #{regularExpress,jdbcType=VARCHAR}, #{maxlength,jdbcType=INTEGER}, 
+      #{styleExpress,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{addFlag,jdbcType=INTEGER}, 
+      #{editFlag,jdbcType=INTEGER}, #{listFlag,jdbcType=INTEGER}, #{queryFlag,jdbcType=INTEGER}, 
+      #{queryFormat,jdbcType=VARCHAR}, #{hrefColumn,jdbcType=VARCHAR}, #{detailFlag,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.orange.heart.entity.RCrudColumn" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into r_crud_column
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="columnName != null" >
+        `column_name`,
+      </if>
+      <if test="columnType != null" >
+        column_type,
+      </if>
+      <if test="columnId != null" >
+        column_id,
+      </if>
+      <if test="dictInfo != null" >
+        dict_info,
+      </if>
+      <if test="required != null" >
+        required,
+      </if>
+      <if test="dataFormat != null" >
+        data_format,
+      </if>
+      <if test="regularExpress != null" >
+        regular_express,
+      </if>
+      <if test="maxlength != null" >
+        maxlength,
+      </if>
+      <if test="styleExpress != null" >
+        style_express,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="addFlag != null" >
+        add_flag,
+      </if>
+      <if test="editFlag != null" >
+        edit_flag,
+      </if>
+      <if test="listFlag != null" >
+        list_flag,
+      </if>
+      <if test="queryFlag != null" >
+        query_flag,
+      </if>
+      <if test="queryFormat != null" >
+        query_format,
+      </if>
+      <if test="hrefColumn != null" >
+        href_column,
+      </if>
+      <if test="detailFlag != null" >
+        detail_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null" >
+        #{columnType,jdbcType=INTEGER},
+      </if>
+      <if test="columnId != null" >
+        #{columnId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictInfo != null" >
+        #{dictInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="required != null" >
+        #{required,jdbcType=INTEGER},
+      </if>
+      <if test="dataFormat != null" >
+        #{dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="regularExpress != null" >
+        #{regularExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="maxlength != null" >
+        #{maxlength,jdbcType=INTEGER},
+      </if>
+      <if test="styleExpress != null" >
+        #{styleExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="addFlag != null" >
+        #{addFlag,jdbcType=INTEGER},
+      </if>
+      <if test="editFlag != null" >
+        #{editFlag,jdbcType=INTEGER},
+      </if>
+      <if test="listFlag != null" >
+        #{listFlag,jdbcType=INTEGER},
+      </if>
+      <if test="queryFlag != null" >
+        #{queryFlag,jdbcType=INTEGER},
+      </if>
+      <if test="queryFormat != null" >
+        #{queryFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="hrefColumn != null" >
+        #{hrefColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="detailFlag != null" >
+        #{detailFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.orange.heart.entity.RCrudColumnExample" resultType="java.lang.Integer" >
+    select count(*) from r_crud_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update r_crud_column
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnName != null" >
+        `column_name` = #{record.columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnType != null" >
+        column_type = #{record.columnType,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnId != null" >
+        column_id = #{record.columnId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictInfo != null" >
+        dict_info = #{record.dictInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.required != null" >
+        required = #{record.required,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataFormat != null" >
+        data_format = #{record.dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regularExpress != null" >
+        regular_express = #{record.regularExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxlength != null" >
+        maxlength = #{record.maxlength,jdbcType=INTEGER},
+      </if>
+      <if test="record.styleExpress != null" >
+        style_express = #{record.styleExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.addFlag != null" >
+        add_flag = #{record.addFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.editFlag != null" >
+        edit_flag = #{record.editFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.listFlag != null" >
+        list_flag = #{record.listFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryFlag != null" >
+        query_flag = #{record.queryFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryFormat != null" >
+        query_format = #{record.queryFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hrefColumn != null" >
+        href_column = #{record.hrefColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailFlag != null" >
+        detail_flag = #{record.detailFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update r_crud_column
+    set id = #{record.id,jdbcType=INTEGER},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      `column_name` = #{record.columnName,jdbcType=VARCHAR},
+      column_type = #{record.columnType,jdbcType=INTEGER},
+      column_id = #{record.columnId,jdbcType=VARCHAR},
+      dict_info = #{record.dictInfo,jdbcType=VARCHAR},
+      required = #{record.required,jdbcType=INTEGER},
+      data_format = #{record.dataFormat,jdbcType=VARCHAR},
+      regular_express = #{record.regularExpress,jdbcType=VARCHAR},
+      maxlength = #{record.maxlength,jdbcType=INTEGER},
+      style_express = #{record.styleExpress,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      add_flag = #{record.addFlag,jdbcType=INTEGER},
+      edit_flag = #{record.editFlag,jdbcType=INTEGER},
+      list_flag = #{record.listFlag,jdbcType=INTEGER},
+      query_flag = #{record.queryFlag,jdbcType=INTEGER},
+      query_format = #{record.queryFormat,jdbcType=VARCHAR},
+      href_column = #{record.hrefColumn,jdbcType=VARCHAR},
+      detail_flag = #{record.detailFlag,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.orange.heart.entity.RCrudColumn" >
+    update r_crud_column
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        `column_name` = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnType != null" >
+        column_type = #{columnType,jdbcType=INTEGER},
+      </if>
+      <if test="columnId != null" >
+        column_id = #{columnId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictInfo != null" >
+        dict_info = #{dictInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="required != null" >
+        required = #{required,jdbcType=INTEGER},
+      </if>
+      <if test="dataFormat != null" >
+        data_format = #{dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="regularExpress != null" >
+        regular_express = #{regularExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="maxlength != null" >
+        maxlength = #{maxlength,jdbcType=INTEGER},
+      </if>
+      <if test="styleExpress != null" >
+        style_express = #{styleExpress,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="addFlag != null" >
+        add_flag = #{addFlag,jdbcType=INTEGER},
+      </if>
+      <if test="editFlag != null" >
+        edit_flag = #{editFlag,jdbcType=INTEGER},
+      </if>
+      <if test="listFlag != null" >
+        list_flag = #{listFlag,jdbcType=INTEGER},
+      </if>
+      <if test="queryFlag != null" >
+        query_flag = #{queryFlag,jdbcType=INTEGER},
+      </if>
+      <if test="queryFormat != null" >
+        query_format = #{queryFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="hrefColumn != null" >
+        href_column = #{hrefColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="detailFlag != null" >
+        detail_flag = #{detailFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.orange.heart.entity.RCrudColumn" >
+    update r_crud_column
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      `column_name` = #{columnName,jdbcType=VARCHAR},
+      column_type = #{columnType,jdbcType=INTEGER},
+      column_id = #{columnId,jdbcType=VARCHAR},
+      dict_info = #{dictInfo,jdbcType=VARCHAR},
+      required = #{required,jdbcType=INTEGER},
+      data_format = #{dataFormat,jdbcType=VARCHAR},
+      regular_express = #{regularExpress,jdbcType=VARCHAR},
+      maxlength = #{maxlength,jdbcType=INTEGER},
+      style_express = #{styleExpress,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      add_flag = #{addFlag,jdbcType=INTEGER},
+      edit_flag = #{editFlag,jdbcType=INTEGER},
+      list_flag = #{listFlag,jdbcType=INTEGER},
+      query_flag = #{queryFlag,jdbcType=INTEGER},
+      query_format = #{queryFormat,jdbcType=VARCHAR},
+      href_column = #{hrefColumn,jdbcType=VARCHAR},
+      detail_flag = #{detailFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+</mapper>

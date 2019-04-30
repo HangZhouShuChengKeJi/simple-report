@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" packages="com.orange.commons.support.log4j2" verbose="true">
+    <Properties>
+        <Property name="logCharset">UTF-8</Property>
+        <Property name="logDir">/home/admin/heart/logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="mainAppender" fileName="${logDir}/main.log" filePattern="${logDir}/main.log.%d{yyyy-MM-dd}">
+            <PatternLayout charset="${logCharset}" alwaysWriteExceptions="true">
+                <Pattern>%traceId %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{2} %l - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+
+        <!-- 默认日志 -->
+        <Root level="INFO">
+            <AppenderRef ref="mainAppender" />
+        </Root>
+
+        <logger name="com.alibaba.dubbo" level="INFO" />
+        <logger name="com.zaxxer.hikari" level="WARN" />
+        <logger name="org.springframework.boot" level="INFO" />
+        <logger name="org.apache.zookeeper" level="INFO" />
+
+    </Loggers>
+</Configuration>

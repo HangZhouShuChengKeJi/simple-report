@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orange.heart.dao.RReportSqlDAO" >
+  <resultMap id="BaseResultMap" type="com.orange.heart.entity.RReportSql" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sql_code" property="sqlCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sql" property="sql" jdbcType="VARCHAR" />
+    <result column="data_source" property="dataSource" jdbcType="VARCHAR" />
+    <result column="show_column" property="showColumn" jdbcType="VARCHAR" />
+    <result column="param" property="param" jdbcType="VARCHAR" />
+    <result column="page_size" property="pageSize" jdbcType="INTEGER" />
+    <result column="result_type" property="resultType" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="notice_email" property="noticeEmail" jdbcType="VARCHAR" />
+    <result column="schedule_plan" property="schedulePlan" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sql_code, `name`, `sql`, data_source, show_column, param, page_size, result_type, 
+    `state`, notice_email, schedule_plan, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.orange.heart.entity.RReportSqlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from r_report_sql
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="offset != null and limit != null" >
+      limit ${offset}, ${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from r_report_sql
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from r_report_sql
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.orange.heart.entity.RReportSqlExample" >
+    delete from r_report_sql
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.orange.heart.entity.RReportSql" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into r_report_sql (sql_code, `name`, `sql`, 
+      data_source, show_column, param, 
+      page_size, result_type, `state`, 
+      notice_email, schedule_plan, create_time, 
+      update_time)
+    values (#{sqlCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sql,jdbcType=VARCHAR}, 
+      #{dataSource,jdbcType=VARCHAR}, #{showColumn,jdbcType=VARCHAR}, #{param,jdbcType=VARCHAR}, 
+      #{pageSize,jdbcType=INTEGER}, #{resultType,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{noticeEmail,jdbcType=VARCHAR}, #{schedulePlan,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.orange.heart.entity.RReportSql" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into r_report_sql
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqlCode != null" >
+        sql_code,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="sql != null" >
+        `sql`,
+      </if>
+      <if test="dataSource != null" >
+        data_source,
+      </if>
+      <if test="showColumn != null" >
+        show_column,
+      </if>
+      <if test="param != null" >
+        param,
+      </if>
+      <if test="pageSize != null" >
+        page_size,
+      </if>
+      <if test="resultType != null" >
+        result_type,
+      </if>
+      <if test="state != null" >
+        `state`,
+      </if>
+      <if test="noticeEmail != null" >
+        notice_email,
+      </if>
+      <if test="schedulePlan != null" >
+        schedule_plan,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqlCode != null" >
+        #{sqlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sql != null" >
+        #{sql,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null" >
+        #{dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="showColumn != null" >
+        #{showColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="pageSize != null" >
+        #{pageSize,jdbcType=INTEGER},
+      </if>
+      <if test="resultType != null" >
+        #{resultType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="noticeEmail != null" >
+        #{noticeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulePlan != null" >
+        #{schedulePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.orange.heart.entity.RReportSqlExample" resultType="java.lang.Integer" >
+    select count(*) from r_report_sql
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update r_report_sql
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sqlCode != null" >
+        sql_code = #{record.sqlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sql != null" >
+        `sql` = #{record.sql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataSource != null" >
+        data_source = #{record.dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showColumn != null" >
+        show_column = #{record.showColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.param != null" >
+        param = #{record.param,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageSize != null" >
+        page_size = #{record.pageSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.resultType != null" >
+        result_type = #{record.resultType,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        `state` = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.noticeEmail != null" >
+        notice_email = #{record.noticeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schedulePlan != null" >
+        schedule_plan = #{record.schedulePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update r_report_sql
+    set id = #{record.id,jdbcType=INTEGER},
+      sql_code = #{record.sqlCode,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      `sql` = #{record.sql,jdbcType=VARCHAR},
+      data_source = #{record.dataSource,jdbcType=VARCHAR},
+      show_column = #{record.showColumn,jdbcType=VARCHAR},
+      param = #{record.param,jdbcType=VARCHAR},
+      page_size = #{record.pageSize,jdbcType=INTEGER},
+      result_type = #{record.resultType,jdbcType=INTEGER},
+      `state` = #{record.state,jdbcType=INTEGER},
+      notice_email = #{record.noticeEmail,jdbcType=VARCHAR},
+      schedule_plan = #{record.schedulePlan,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.orange.heart.entity.RReportSql" >
+    update r_report_sql
+    <set >
+      <if test="sqlCode != null" >
+        sql_code = #{sqlCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sql != null" >
+        `sql` = #{sql,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null" >
+        data_source = #{dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="showColumn != null" >
+        show_column = #{showColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="pageSize != null" >
+        page_size = #{pageSize,jdbcType=INTEGER},
+      </if>
+      <if test="resultType != null" >
+        result_type = #{resultType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="noticeEmail != null" >
+        notice_email = #{noticeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulePlan != null" >
+        schedule_plan = #{schedulePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.orange.heart.entity.RReportSql" >
+    update r_report_sql
+    set sql_code = #{sqlCode,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `sql` = #{sql,jdbcType=VARCHAR},
+      data_source = #{dataSource,jdbcType=VARCHAR},
+      show_column = #{showColumn,jdbcType=VARCHAR},
+      param = #{param,jdbcType=VARCHAR},
+      page_size = #{pageSize,jdbcType=INTEGER},
+      result_type = #{resultType,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=INTEGER},
+      notice_email = #{noticeEmail,jdbcType=VARCHAR},
+      schedule_plan = #{schedulePlan,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
