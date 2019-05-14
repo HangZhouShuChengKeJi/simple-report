@@ -29,6 +29,11 @@ datasource.main.password=123456
 datasource.main.initialSize=2
 datasource.main.maxTotal=10
 ```
+也可以不修改，直接用命令行参数传入
+比如启动参数增加：
+```
+ --datasource.main.url=jdbc:mysql://数据库ip:数据库端口/ctb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true --datasource.main.username=数据库用户名 --datasource.main.password=数据库密码
+```
 
 执行工程根目录下的初始化sql 脚本:init.sql
 
