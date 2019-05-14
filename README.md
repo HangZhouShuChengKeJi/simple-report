@@ -9,6 +9,11 @@
  - 支持业务告警需求，比如某个指标没有达标，则发告警邮件等 （规划中）
  - 支持图表展示（规划中）
  - 支持数据分析任务流（规划中）
+ 
+## 开源交流
+欢迎针对该项目提出宝贵意见，更欢迎贡献您的一份力量
+
+QQ群：695332013
 
 ## 使用说明
 
@@ -49,3 +54,4 @@ datasource.main.maxTotal=10
  mvn package -DskipTests=true
  java -jar /home/admin/heart.jar  -Dfile.encoding=UTF-8  -Duser.timezone=GMT+08  -Djava.io.tmpdir=/home/admin/heart/temp -Xms1024m -Xmx2048m
  ```
+
