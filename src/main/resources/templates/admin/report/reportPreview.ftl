@@ -114,7 +114,7 @@
                                     <!-- 图片展示-->
                                     <#if showColumn?? && showColumn.type?? && showColumn.type == '3'>
                                         <#if showColumn.value??>
-                                            <img src="${showColumn.value!}" width="35px" height="35px">
+                                            <img src="${showColumn.value!}" width="200px">
                                         </#if>
                                     <#else >
                                         <#if showColumn.showEnum?? && dictTypeMap?? && dictTypeMap[("${showColumn.showEnum!}")]?? >
