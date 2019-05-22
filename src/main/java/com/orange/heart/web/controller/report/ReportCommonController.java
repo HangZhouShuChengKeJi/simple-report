@@ -139,6 +139,8 @@ public class ReportCommonController extends BaseAdminController {
             pageNo = 1;
         }
         query.setPageNo(pageNo);
+        // 暂且设置一页30条数据
+        query.setPageSize(30);
         query.setQueryParams(paramList);
         if (CollectionUtils.isEmpty(paramList)) {
             return query;
